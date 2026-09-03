@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/herramienta",
+      "destination": "https://tu-primer-control-del-impulso.vercel.app/herramienta"
+    },
+    {
+      "source": "/herramienta/:path*",
+      "destination": "https://tu-primer-control-del-impulso.vercel.app/herramienta/:path*"
+    }
+  ]
+}
