@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gracias por tu compra — Protocolo de Resistencia al Contacto Cero™</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F5EDE3;
+    --cream-2:#EFE2D0;
+    --clay:#A8502E;
+    --clay-deep:#8A3E22;
+    --sienna:#C97452;
+    --ink:#6B3420;
+    --ink-soft:#7A5240;
+    --card:#FBF6EF;
+    --card-line: rgba(107,52,32,0.14);
+    --sage:#6F7D4C;
+    --sage-text:#52603A;
+    --sage-bg:#EDF0E1;
+    --sage-line: rgba(111,125,76,0.3);
+    --berry:#8B2F45;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--cream);
+    font-family:'Sora', sans-serif;
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    min-height:100vh;
+  }
+  h1,h2{ font-family:'Fraunces', serif; letter-spacing:-0.01em; }
+
+  .page-wrap{
+    position:relative; width:100%; min-height:100vh;
+    display:flex; align-items:center; justify-content:center;
+    padding:clamp(20px,5vw,48px) 16px;
+    background:
+      radial-gradient(ellipse 55% 40% at 88% 6%, rgba(201,116,82,0.16), transparent 60%),
+      radial-gradient(ellipse 50% 38% at 6% 94%, rgba(168,80,46,0.12), transparent 60%),
+      var(--cream);
+  }
+
+  .wrap{ width:100%; max-width:640px; }
+
+  .card{
+    background:var(--card); border:1px solid var(--card-line);
+    border-radius:24px; padding:clamp(28px,6vw,48px);
+    box-shadow:0 30px 60px -28px rgba(107,52,32,0.28);
+  }
+
+  .check-badge{
+    width:60px; height:60px; border-radius:50%;
+    background:linear-gradient(135deg, var(--clay) 0%, var(--clay-deep) 100%);
+    display:flex; align-items:center; justify-content:center;
+    margin:0 auto 22px auto;
+    box-shadow:0 10px 24px -8px rgba(138,62,34,0.45);
+  }
+  .check-badge svg{ width:28px; height:28px; }
+
+  h1{
+    text-align:center; font-size:clamp(1.5rem,4.4vw,2.05rem); line-height:1.25;
+    color:var(--berry); font-weight:600;
+  }
+
+  .confirm-text{
+    margin-top:22px; text-align:center;
+  }
+  .confirm-text p{
+    font-size:1rem; line-height:1.65; color:var(--ink-soft);
+  }
+  .confirm-text p + p{ margin-top:14px; }
+  .confirm-text strong{ color:var(--ink); font-weight:700; }
+
+  .divider{
+    height:1px; background:var(--card-line); margin:32px 0;
+  }
+
+  .steps-heading{
+    font-size:clamp(1.2rem,3.2vw,1.4rem); color:var(--ink); font-weight:600;
+    text-align:center; margin-bottom:22px;
+  }
+
+  .steps{ display:flex; flex-direction:column; gap:16px; }
+
+  .step{
+    border-radius:18px; padding:20px 22px; display:flex; gap:16px; align-items:flex-start;
+  }
+  .step-icon{
+    flex-shrink:0; width:38px; height:38px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; margin-top:2px;
+  }
+  .step-icon svg{ width:19px; height:19px; }
+  .step-title{ font-size:1.02rem; font-weight:700; margin-bottom:6px; }
+  .step-text{ font-size:1rem; line-height:1.6; }
+
+  /* Paso 1 — el más importante, máximo contraste */
+  .step-email{
+    background:linear-gradient(135deg, var(--clay) 0%, var(--clay-deep) 100%);
+    box-shadow:0 14px 30px -12px rgba(138,62,34,0.5);
+  }
+  .step-email .step-icon{ background:rgba(255,255,255,0.18); }
+  .step-email .step-icon svg path,
+  .step-email .step-icon svg rect{ stroke:var(--cream); }
+  .step-email .step-title{ color:var(--cream); font-size:1.12rem; }
+  .step-email .step-text{ color:var(--cream-2); }
+
+  /* Paso 2 — aviso de spam, destacado pero secundario */
+  .step-spam{
+    background:var(--sage-bg); border:1.5px solid var(--sage-line);
+  }
+  .step-spam .step-icon{ background:rgba(111,125,76,0.16); }
+  .step-spam .step-icon svg path,
+  .step-spam .step-icon svg line,
+  .step-spam .step-icon svg circle{ stroke:var(--sage-text); }
+  .step-spam .step-title{ color:var(--sage-text); }
+  .step-spam .step-text{ color:var(--sage-text); }
+
+  /* Pasos 3 y 4 — simples */
+  .step-simple{ background:var(--cream-2); }
+  .step-simple .step-icon{ background:rgba(107,52,32,0.1); }
+  .step-simple .step-icon svg path,
+  .step-simple .step-icon svg circle,
+  .step-simple .step-icon svg polyline{ stroke:var(--ink); }
+  .step-simple .step-title{ color:var(--ink); }
+  .step-simple .step-text{ color:var(--ink-soft); }
+
+  .closing{
+    margin-top:32px; text-align:center;
+  }
+  .closing p{
+    font-size:1rem; line-height:1.6; color:var(--ink-soft);
+  }
+  .signature{
+    margin-top:18px; font-family:'Fraunces', serif; font-style:italic;
+    font-size:1.05rem; color:var(--ink);
+  }
+  .signature span{
+    display:block; font-family:'Sora', sans-serif; font-style:normal;
+    font-size:0.8rem; color:var(--ink-soft); margin-top:3px;
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{ animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
+  }
+
+  @media (max-width:480px){
+    .card{ border-radius:20px; }
+    .step{ padding:18px; gap:13px; }
+    .step-icon{ width:34px; height:34px; }
+    .step-icon svg{ width:17px; height:17px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+  <div class="wrap">
+    <div class="card">
+
+      <div class="check-badge">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 13L9.5 17.5L19 7" stroke="#F5EDE3" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <h1>¡Gracias por confiar en el Protocolo de Resistencia al Contacto Cero™!</h1>
+
+      <div class="confirm-text">
+        <p>Tu compra está confirmada.</p>
+        <p>Acabas de dar el primer paso para sostener tu contacto cero y fortalecer tu decisión. Es una de las mejores cosas que podías hacer por ti misma en este momento.</p>
+        <p>A medida que avances en el protocolo, vas a poder responder a tus impulsos sin ceder a la tentación de escribirle, y sostener tu contacto cero incluso en los momentos de mayor ansiedad.</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <p class="steps-heading">Qué hacer ahora</p>
+
+      <div class="steps">
+
+        <div class="step step-email">
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="5" width="18" height="14" rx="2" stroke-width="1.8"/>
+              <path d="M3 7L12 13L21 7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <div class="step-title">Revisa tu email ahora</div>
+            <div class="step-text">Te enviamos un email a la dirección que usaste para comprar. Ahí están todos los enlaces para acceder al Protocolo de Resistencia al Contacto Cero™, junto con las seis herramientas que lo acompañan: la Guía de Disparadores Emocionales, las Frases de Contención Inmediata, el Diario de Registro de Impulsos, el Checklist de Emergencia de 60 Segundos, el Banco de Razones™ y las Frases Motivacionales. Ábrelo apenas puedas.</div>
+          </div>
+        </div>
+
+        <div class="step step-spam">
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="9" stroke-width="1.8"/>
+              <line x1="12" y1="8" x2="12" y2="13" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="12" cy="16" r="0.9" fill="#52603A"/>
+            </svg>
+          </div>
+          <div>
+            <div class="step-title">¿No lo encuentras? Revisa spam y promociones</div>
+            <div class="step-text">Si no ves el email en tu bandeja principal, no te preocupes. Revisa tu carpeta de Spam y tu carpeta de Promociones — a veces los emails se van ahí, sobre todo la primera vez que te escribe un remitente nuevo. Si lo encuentras ahí, márcalo como "No es spam" para que los próximos te lleguen directo a la bandeja principal.</div>
+          </div>
+        </div>
+
+        <div class="step step-simple">
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <polyline points="6 4 18 12 6 20" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <div class="step-title">Empieza con el primer módulo</div>
+            <div class="step-text">Cuando tengas el enlace, haz clic y empieza con el primer paso del protocolo. Todo está diseñado para que avances sin confusiones, a tu propio ritmo.</div>
+          </div>
+        </div>
+
+        <div class="step step-simple">
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 3H16L18 5V21L12 17.5L6 21V5L6 3Z" stroke-width="1.8" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <div class="step-title">Guarda el email</div>
+            <div class="step-text">Guárdalo o márcalo como importante, así lo encuentras fácil cuando quieras volver a alguna de las herramientas.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="closing">
+        <p>Estamos felices de tenerte aquí. Si tienes cualquier pregunta, responde a este email y te ayudamos.</p>
+        <div class="signature">
+          Sofía Herrera
+          <span>Creadora del Protocolo de Resistencia al Contacto Cero™</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
