@@ -7,6 +7,14 @@
     {
       "source": "/herramienta/:path*",
       "destination": "https://tu-primer-control-del-impulso.vercel.app/herramienta/:path*"
+    },
+    {
+      "source": "/app",
+      "destination": "https://protocolo-app-sand.vercel.app/app"
+    },
+    {
+      "source": "/app/:path*",
+      "destination": "https://protocolo-app-sand.vercel.app/app/:path*"
     }
   ]
 }
