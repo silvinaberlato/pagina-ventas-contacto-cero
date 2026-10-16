@@ -81,27 +81,9 @@
   .price-note{ font-size:14px; color:var(--ink-soft); margin-top:10px; }
 
   .decision-block{ text-align:center; }
-  .cta-principal{
-    position:relative; overflow:hidden; display:inline-flex; align-items:center; justify-content:center;
-    gap:10px; width:100%; max-width:560px; background:linear-gradient(135deg, var(--clay) 0%, var(--clay-deep) 100%);
-    color:var(--cream); border:none; border-radius:16px; padding:22px 28px;
-    font-family:'Sora',sans-serif; font-size:clamp(15px,3.4vw,17.5px); font-weight:800; letter-spacing:0.01em;
-    cursor:pointer; box-shadow:0 14px 32px -10px rgba(0,0,0,0.4); text-decoration:none;
-    transition:transform 180ms ease-out, box-shadow 200ms ease-out; animation: ctaPulse 3.2s ease-in-out infinite;
-  }
-  .cta-principal::after{ content:''; position:absolute; top:0; left:-75%; width:50%; height:100%; background:linear-gradient(120deg, transparent, rgba(255,255,255,0.35), transparent); transform:skewX(-20deg); animation: ctaShimmer 3.6s ease-in-out infinite; }
-  @keyframes ctaShimmer{ 0%,88%{ left:-75%; } 100%{ left:125%; } }
-  @keyframes ctaPulse{ 0%,100%{ box-shadow:0 14px 32px -10px rgba(0,0,0,0.4), 0 0 0 0 rgba(224,145,111,0.45); } 50%{ box-shadow:0 14px 32px -10px rgba(0,0,0,0.4), 0 0 0 10px rgba(224,145,111,0); } }
-  .cta-principal:hover{ transform:translateY(-3px); filter:brightness(1.05); }
-  .cta-principal:active{ transform:scale(0.97); }
-  .cta-principal .arrow{ display:inline-block; transition:transform 180ms ease-out; }
-  .cta-principal:hover .arrow{ transform:translateX(4px); }
+  #hotmart-sales-funnel{ width:100%; max-width:560px; margin:0 auto; box-sizing:border-box; }
+  #hotmart-sales-funnel iframe, #hotmart-sales-funnel img{ max-width:100%; }
   .cta-support{ font-size:14px; color:var(--ink-soft); margin-top:16px; }
-  .reject-link{ display:inline-block; margin-top:22px; font-size:12.5px; color:var(--ink-soft); text-decoration:underline; text-underline-offset:3px; cursor:pointer; opacity:0.85; }
-  .reject-link:hover{ opacity:1; }
-  .reject-link:focus-visible, .cta-principal:focus-visible{ outline:3px solid var(--clay-deep); outline-offset:3px; }
-
-  @media (prefers-reduced-motion:reduce){ .cta-principal, .cta-principal::after{ animation:none !important; } .cta-principal:hover{ transform:none; } }
 
   .footer-note{ text-align:center; font-size:13px; color:var(--ink-soft); padding:26px 0 40px; }
 
@@ -352,23 +334,22 @@
     <h2>Agrega el <span class="highlight">Sistema de Fortalecimiento Emocional™</span> a tu compra</h2>
     <p class="lead" style="max-width:520px; margin:0 auto 32px;">Protege lo que ya lograste. Sostén tu contacto cero. No vuelvas a empezar de cero.</p>
 
-    <!--
-      BLOQUE PROVISIONAL — SOLO PARA REVISIÓN VISUAL (FASE 2).
-      Este botón y este enlace NO procesan ningún pago ni simulan una compra.
-      En la Fase 3, todo este bloque se reemplaza una única vez por el código
-      oficial de los botones de Upsell de Hotmart, sin modificarlo.
-    -->
-    <a href="#" class="cta-principal" onclick="return false;" aria-label="Sí, quiero agregar el Sistema de Fortalecimiento Emocional por 17 dólares">
-      SÍ, QUIERO AGREGAR EL SISTEMA DE FORTALECIMIENTO EMOCIONAL™ POR $17
-      <span class="arrow" aria-hidden="true">→</span>
-    </a>
-    <p class="cta-support">Pago único · Acceso inmediato · Se agrega a tu compra</p>
+    <!-- HOTMART - Sales Funnel Widget -->
+    <!--- sales funnel container --->
+    <div id="hotmart-sales-funnel"></div>
 
-    <a href="#" class="reject-link" onclick="return false;">No, gracias. Continuar sin agregar esta oferta.</a>
+    <p class="cta-support">Pago único · Acceso inmediato · Se agrega a tu compra</p>
   </div>
 </section>
 
 <p class="footer-note">Protocolo de Resistencia al Contacto Cero™ · Esta oferta se muestra una sola vez, justo después de tu compra.</p>
+
+<!--- script load and setup --->
+<script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
+<script>
+checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel')
+</script>
+<!-- HOTMART - Sales Funnel Widget -->
 
 </body>
 </html>
