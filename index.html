@@ -769,5 +769,28 @@
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 
+<script>
+// Prellena el email en el checkout de Hotmart cuando la persona llega con ?email=... (enlaces de los
+// emails de carrito abandonado y de la herramienta del lead magnet). Así compra con el mismo email que
+// dejó al registrarse, y la automatización de Resend puede detener la secuencia.
+(function () {
+  try {
+    var params = new URLSearchParams(window.location.search);
+    // En una query string un "+" llega como espacio, y un email no puede tener espacios.
+    var email = (params.get('email') || '').trim().replace(/ /g, '+');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
+    document.querySelectorAll('a[href^="https://pay.hotmart.com/"]').forEach(function (a) {
+      var url = new URL(a.href);
+      url.searchParams.set('email', email);
+      a.href = url.toString();
+    });
+    // El email ya está en los botones: se quita de la barra de direcciones.
+    if (window.history && window.history.replaceState) {
+      window.history.replaceState(null, '', window.location.pathname + window.location.hash);
+    }
+  } catch (e) {}
+})();
+</script>
+
 </body>
 </html>
