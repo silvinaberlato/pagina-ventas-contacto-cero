@@ -108,8 +108,15 @@
   .cta-principal:active{ transform:scale(0.97); }
   .cta-principal .arrow{ display:inline-block; transition:transform 180ms ease-out; }
   .cta-principal:hover .arrow{ transform:translateX(4px); }
-  .cta-principal.expired{ animation:none; filter:grayscale(0.6); opacity:0.6; cursor:not-allowed; box-shadow:none; }
   .cta-support{ font-size:14px; color:var(--ink-soft); margin-top:16px; }
+  [hidden]{ display:none !important; }
+  #oferta{ scroll-margin-top:90px; }
+  #hotmart-sales-funnel{ width:100%; max-width:680px; margin:0 auto; box-sizing:border-box; overflow:visible; }
+  #hotmart-sales-funnel iframe{ display:block; width:100% !important; max-width:100%; min-height:760px !important; border:0; }
+  #hotmart-sales-funnel img{ max-width:100%; }
+  .offer-expired{ max-width:560px; margin:0 auto; }
+  .offer-expired h3{ color:var(--berry); margin-bottom:8px; }
+  .offer-expired .cta-principal{ margin-top:12px; }
   .reject-link{ display:inline-block; margin-top:20px; font-size:12.5px; color:var(--ink-soft); text-decoration:underline; text-underline-offset:3px; cursor:pointer; opacity:0.85; }
   .reject-link:hover{ opacity:1; }
   .reject-link:focus-visible, .cta-principal:focus-visible{ outline:3px solid var(--clay-deep); outline-offset:3px; }
@@ -122,6 +129,7 @@
 
   .footer-note{ text-align:center; font-size:13px; color:var(--ink-soft); padding:24px 0 40px; }
 
+  @media (max-width:480px){ #hotmart-sales-funnel{ width:calc(100% + 24px); max-width:none; margin-left:-12px; margin-right:-12px; } #hotmart-sales-funnel iframe{ min-height:880px !important; } }
   @media (max-width:480px){ section{ padding:32px 0; } .compare-col, .price-card, .countdown-box{ padding:22px 18px; } }
 </style>
 </head>
@@ -129,7 +137,7 @@
 
 <!-- ============ SECCIÓN 1 — BARRA SUPERIOR DE ÚLTIMA OPORTUNIDAD ============ -->
 <div class="top-bar">
-  <p>⚠️ Última oportunidad — esta oferta está disponible por los próximos 5 minutos</p>
+  <p id="topbar-text">⚠️ Última oportunidad — esta oferta está disponible por los próximos 15 minutos</p>
   <div class="top-bar-progress"><div class="top-bar-progress-fill" id="topbar-fill"></div></div>
 </div>
 
@@ -164,7 +172,7 @@
   <div class="wrap" style="max-width:420px;">
     <div class="countdown-box">
       <p class="countdown-label">Esta oferta expira en:</p>
-      <div class="countdown-time" id="countdown-time">05:00</div>
+      <div class="countdown-time" id="countdown-time">15:00</div>
       <div class="countdown-progress"><div class="countdown-progress-fill" id="countdown-fill"></div></div>
       <p class="expired-msg" id="expired-msg">Esta oferta expiró.</p>
     </div>
@@ -180,19 +188,18 @@
       <p class="price-label" style="margin-top:12px;">Ahora</p>
       <p class="price-new">$9</p>
       <span class="price-save">Ahorras $8</span>
-      <p class="price-note">Pago único · Se agrega a tu compra</p>
+      <p class="price-note">Sin suscripción · Acceso inmediato · Se agrega a tu compra</p>
     </div>
 
     <!--
-      Este botón y el de la sección de decisión final son EL MISMO bloque de decisión,
-      repetido dos veces (igual que la página de referencia). Los dos deben reemplazarse
-      por el código oficial de Hotmart en la Fase 3, exactamente igual, sin modificarlo.
+      El widget de Hotmart se monta una sola vez, en la sección de decisión final.
+      Este botón solo lleva hasta allí.
     -->
-    <a href="#" class="cta-principal cta-repeat" onclick="return false;" aria-label="Sí, quiero el Sistema de Fortalecimiento Emocional por 9 dólares" style="margin-top:28px;">
+    <a href="#oferta" class="cta-principal cta-repeat" aria-label="Sí, quiero el Sistema de Fortalecimiento Emocional por 9 dólares" style="margin-top:28px;">
       <span class="btn-text">SÍ, QUIERO EL SISTEMA DE FORTALECIMIENTO EMOCIONAL™ POR $9</span>
       <span class="arrow" aria-hidden="true">→</span>
     </a>
-    <p class="cta-support cta-support-repeat">Pago único · Descuento especial de esta pantalla</p>
+    <p class="cta-support cta-support-repeat">Descuento especial de esta pantalla</p>
   </div>
 </section>
 
@@ -298,48 +305,68 @@
 
 <!-- ============ SECCIÓN 13 — DECISIÓN FINAL (ÚNICO BLOQUE DE TODA LA PÁGINA) ============ -->
 <section class="accent">
-  <div class="wrap decision-block">
+  <div class="wrap decision-block" id="oferta">
     <h2>Tu última oportunidad de agregarlo hoy</h2>
     <p class="lead" style="max-width:480px; margin:0 auto 8px;"><span class="highlight">$17</span> → <span class="highlight">$9</span> · Ahorras $8</p>
     <p style="max-width:480px; margin:0 auto 28px; color:var(--ink-soft);">Esta oferta se muestra una sola vez, en esta pantalla.</p>
 
-    <!--
-      BLOQUE PROVISIONAL — SOLO PARA REVISIÓN VISUAL (FASE 2).
-      Este botón y este enlace NO procesan ningún pago ni simulan una compra.
-      En la Fase 3, todo este bloque se reemplaza una única vez por el código
-      oficial de los botones de Downsell de Hotmart, sin modificarlo.
-    -->
-    <a href="#" class="cta-principal" id="cta-btn" onclick="return false;" aria-label="Sí, quiero el Sistema de Fortalecimiento Emocional por 9 dólares">
-      <span class="btn-text">SÍ, QUIERO EL SISTEMA DE FORTALECIMIENTO EMOCIONAL™ POR $9</span>
-      <span class="arrow" aria-hidden="true">→</span>
-    </a>
-    <p class="cta-support" id="cta-support-text">Pago único · Descuento especial de esta pantalla</p>
+    <!-- HOTMART - Sales Funnel Widget -->
+    <!--- sales funnel container --->
+    <div id="hotmart-sales-funnel"></div>
 
-    <a href="#" class="reject-link" onclick="return false;">No, gracias. Continuar sin agregar esta oferta.</a>
+    <p class="cta-support" id="cta-support-text">Sin suscripción · Acceso inmediato · Se agrega a tu compra</p>
+
+    <a href="https://contactocero.tuherramientadigital.com/gracias" class="reject-link" id="reject-link">No, gracias. Continuar sin agregar esta oferta.</a>
+
+    <!-- Al vencer el contador se oculta el widget y se muestra esta salida -->
+    <div class="offer-expired" id="offer-expired" role="status" hidden>
+      <h3>La oferta especial expiró</h3>
+      <p>Esta oferta ya no está disponible en esta pantalla.</p>
+      <a href="https://contactocero.tuherramientadigital.com/gracias" class="cta-principal">
+        <span class="btn-text">Continuar a mi acceso</span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
   </div>
 </section>
 
 <p class="footer-note">Protocolo de Resistencia al Contacto Cero™ · Esta oferta se muestra una sola vez, justo después de tu decisión anterior.</p>
 
+<!--- script load and setup --->
+<script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
+<script>
+checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel')
+</script>
+<!-- HOTMART - Sales Funnel Widget -->
+
 <script>
 (function(){
-  var DURATION = 300; // 5 minutos en segundos
+  var DURATION = 900; // 15 minutos en segundos
+  // Clave propia de esta pantalla (sessionStorage): el inicio sobrevive a recargas y no se reinicia.
   var KEY = 'downsell_start_time';
-  var start = sessionStorage.getItem(KEY);
-  if (!start) {
+  var start = null;
+  try {
+    var saved = parseInt(sessionStorage.getItem(KEY), 10);
+    // Un valor ausente, corrupto o en el futuro (reloj movido) no vale: se empieza de nuevo.
+    if (saved > 0 && saved <= Date.now()) start = saved;
+  } catch (e) {}
+  if (start === null) {
     start = Date.now();
-    sessionStorage.setItem(KEY, String(start));
-  } else {
-    start = parseInt(start, 10);
+    try { sessionStorage.setItem(KEY, String(start)); } catch (e) {}
   }
 
   var countdownEl = document.getElementById('countdown-time');
   var topbarFill = document.getElementById('topbar-fill');
+  var topbarText = document.getElementById('topbar-text');
   var countdownFill = document.getElementById('countdown-fill');
-  var ctaBtns = document.querySelectorAll('.cta-principal');
-  var ctaSupports = document.querySelectorAll('.cta-support');
   var expiredMsg = document.getElementById('expired-msg');
+  var widget = document.getElementById('hotmart-sales-funnel');
+  var offerExpired = document.getElementById('offer-expired');
   var timer;
+
+  function hideAll(selector){
+    document.querySelectorAll(selector).forEach(function(el){ el.hidden = true; });
+  }
 
   function update(){
     var elapsed = Math.floor((Date.now() - start) / 1000);
@@ -353,17 +380,12 @@
 
     if (remaining <= 0) {
       clearInterval(timer);
-      ctaBtns.forEach(function(btn){
-        btn.classList.add('expired');
-        btn.setAttribute('aria-disabled', 'true');
-        btn.style.pointerEvents = 'none';
-        var btnText = btn.querySelector('.btn-text');
-        if (btnText) btnText.textContent = 'Esta oferta expiró';
-      });
+      if (topbarText) topbarText.textContent = 'La oferta especial expiró';
       if (expiredMsg) expiredMsg.style.display = 'block';
-      ctaSupports.forEach(function(el){
-        el.textContent = 'Esta oferta ya no está disponible en esta pantalla.';
-      });
+      // Se oculta todo lo que permite comprar y se deja la salida hacia el acceso.
+      if (widget) widget.hidden = true;
+      hideAll('.cta-repeat, .cta-support, .reject-link');
+      if (offerExpired) offerExpired.hidden = false;
     }
   }
   update();
